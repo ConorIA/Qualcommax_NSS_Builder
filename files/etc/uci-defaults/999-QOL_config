@@ -26,10 +26,21 @@ set wireless.radio1.htmode='HE40'
 set wireless.radio1.channel='auto'
 set wireless.radio1.country='CA'
 
-# Disable Firewall service entirely
-set firewall.@zone[0].input='ACCEPT'
+# Secure the Firewall for a Dumb AP
+# 'input' REJECT protects the AP's local services (SSH/Web)
+# 'forward' ACCEPT allows bridged traffic to pass through transparently
+set firewall.@zone[0].input='REJECT'
 set firewall.@zone[0].forward='ACCEPT'
 set firewall.@zone[0].output='ACCEPT'
+
+# Add a specific rule to allow management from your trusted LAN
+# This ensures you don't lock yourself out
+set firewall.allow_lan_mgmt=rule
+set firewall.allow_lan_mgmt.name='Allow-LAN-Management'
+set firewall.allow_lan_mgmt.src='lan'
+set firewall.allow_lan_mgmt.proto='tcp'
+set firewall.allow_lan_mgmt.dest_port='22 80 443'
+set firewall.allow_lan_mgmt.target='ACCEPT'
 
 # Network settings for a pure bridge
 set network.lan.proto='static'

@@ -2,7 +2,7 @@
 # the system init finished. By default this file does nothing.
 
 # These services must not run on a Dumb AP
-for i in firewall dnsmasq odhcpd; do
+for i in dnsmasq odhcpd; do
     if /etc/init.d/"$i" enabled; then
         /etc/init.d/"$i" disable
         /etc/init.d/"$i" stop
