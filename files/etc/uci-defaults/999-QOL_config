@@ -35,7 +35,4 @@ set network.globals.packet_steering='0'
 set network.@device[0].flow_offloading='0'
 set network.@device[0].flow_offloading_hw='0'
 
-# uHTTPd settings
-set uhttpd.main.redirect_https='1'
-
 EOI
